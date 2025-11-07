@@ -140,7 +140,7 @@ export default function FindDonorsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.background,
+    backgroundColor: Colors.background.primary,
   },
   header: {
     backgroundColor: Colors.primary,
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
   searchInputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: Colors.background,
+    backgroundColor: Colors.background.primary,
     borderRadius: 8,
     paddingHorizontal: Spacing.md,
     height: 48,
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.lg,
     paddingVertical: Spacing.xs,
     borderRadius: 16,
-    backgroundColor: Colors.background,
+    backgroundColor: Colors.background.primary,
     marginRight: Spacing.sm,
     borderWidth: 1,
     borderColor: Colors.border.light,

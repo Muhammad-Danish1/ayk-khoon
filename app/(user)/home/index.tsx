@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { BorderRadius, Colors, Shadows, Spacing, Typography } from '../../../src/theme";
+import { BorderRadius, Colors, Shadows, Spacing, Typography } from '../../../src/theme';
 
 // Dummy data
 const userStats = {

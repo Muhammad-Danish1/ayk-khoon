@@ -1,9 +1,11 @@
+import { Platform } from 'react-native';
+
 export const Typography = {
   fontFamily: {
-    regular: 'System',
-    medium: 'System',
-    semibold: 'System',
-    bold: 'System',
+    regular: Platform.select({ ios: 'SF Pro Display', android: 'Roboto', default: 'System' }),
+    medium: Platform.select({ ios: 'SF Pro Display', android: 'Roboto', default: 'System' }),
+    semibold: Platform.select({ ios: 'SF Pro Display', android: 'Roboto', default: 'System' }),
+    bold: Platform.select({ ios: 'SF Pro Display', android: 'Roboto', default: 'System' }),
   },
   
   fontSize: {
