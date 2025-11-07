@@ -2,8 +2,8 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Alert 
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { Colors, Spacing, Typography, Shadows } from '../../../../src/theme';
-import { Card } from '../../../../src/components/Card';
+import { Colors, Spacing, Typography, Shadows } from '../../../src/theme';
+import { Card } from '../../../src/components/Card';
 
 type RequestStatus = 'pending' | 'approved' | 'rejected' | 'completed';
 

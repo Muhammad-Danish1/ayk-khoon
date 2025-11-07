@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
-import { Colors, Spacing, Typography, Card } from '../../../../src/theme';
+import { Colors, Spacing, Typography, Card } from '../../../src/theme';
 
 export default function DashboardDetailScreen() {
   const { id } = useLocalSearchParams();

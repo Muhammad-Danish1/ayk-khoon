@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { Colors, Spacing, Typography } from '../../../../src/theme';
+import { Colors, Spacing, Typography } from '../../../src/theme';
 
 const chats = [
   {

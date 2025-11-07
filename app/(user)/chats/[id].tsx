@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, TextInput, FlatList, KeyboardAvoidingView, Plat
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useState } from 'react';
-import { Colors, Spacing, Typography } from '../../../../src/theme';
+import { Colors, Spacing, Typography } from '../../../src/theme';
 
 // Mock data for chat messages
 const messages = [

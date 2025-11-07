@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { Colors, Spacing, Typography } from '../../../../src/theme';
-import { Card } from '../../../../src/components/Card';
+import { Colors, Spacing, Typography } from '../../../src/theme';
+import { Card } from '../../../src/components/Card';
 
 // Mock data
 const stats = [

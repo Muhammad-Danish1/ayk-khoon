@@ -4,8 +4,8 @@ import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { LineChart, BarChart, PieChart } from 'react-native-chart-kit';
 import { Picker } from '@react-native-picker/picker';
-import { Colors, Spacing, Typography, Shadows } from '../../../../src/theme';
-import { Card } from '../../../../src/components/Card';
+import { Colors, Spacing, Typography, Shadows } from '../../../src/theme';
+import { Card } from '../../../src/components/Card';
 
 const screenWidth = Dimensions.get('window').width;
 

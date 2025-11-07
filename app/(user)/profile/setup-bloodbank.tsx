@@ -2,8 +2,8 @@ import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity, Alert 
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { Colors, Spacing, Typography } from '../../../../src/theme';
-import { Button, Input } from '../../../../src/components';
+import { Colors, Spacing, Typography } from '../../../src/theme';
+import { Button, Input } from '../../../src/components';
 
 export default function SetupBloodBankScreen() {
   const router = useRouter();

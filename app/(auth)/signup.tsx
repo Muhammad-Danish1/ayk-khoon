@@ -359,7 +359,3 @@ const styles = StyleSheet.create({
     marginLeft: 4,
   },
 });
-    fontSize: Typography.fontSize.base,
-    fontWeight: Typography.fontWeight.semibold,
-  },
-});

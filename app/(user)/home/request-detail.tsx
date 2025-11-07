@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { Colors, Spacing, Typography, Shadows } from '../../../../src/theme';
-import { Card } from '../../../../src/components/Card';
+import { Colors, Spacing, Typography, Shadows } from '../../../src/theme';
+import { Card } from '../../../src/components/Card';
 
 // Mock data for the request
 const requestData = {

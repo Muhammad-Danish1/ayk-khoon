@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, FlatList } from 'react-native';
-import { Card } from '../../../../src/components/Card';
-import { Colors, Spacing, Typography } from '../../../../src/theme';
+import { Card } from '../../../src/components/Card';
+import { Colors, Spacing, Typography } from '../../../src/theme';
 
 const history = [
   {

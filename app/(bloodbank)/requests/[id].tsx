@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors, Spacing, Typography, Card } from '../../../../src/theme';
+import { Colors, Spacing, Typography, Card } from '../../../src/theme';
 
 export default function RequestDetailScreen() {
   const { id } = useLocalSearchParams();

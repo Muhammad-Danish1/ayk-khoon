@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
 import { MaterialIcons, Ionicons, Feather } from '@expo/vector-icons';
-import { Colors } from '../../../src/theme';
+import { Colors } from '../../src/theme';
 
 export default function BloodBankLayout() {
   return (

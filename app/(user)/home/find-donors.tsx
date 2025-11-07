@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, ScrollView, TextInput, FlatList, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { Colors, Spacing, Typography, Card } from '../../../../src/theme';
+import { Colors, Spacing, Typography, Card } from '../../../src/theme';
 
 type Donor = {
   id: string;
