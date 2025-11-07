@@ -1,3 +1,26 @@
+// Current User Profile
+export const mockCurrentUser = {
+  uid: 'current-user-id',
+  email: 'john.doe@email.com',
+  phone: '+1 234-567-8900',
+  name: 'John Doe',
+  bloodGroup: 'A+' as const,
+  location: { lat: 40.7128, lng: -74.0060 },
+  city: 'New York',
+  age: 32,
+  gender: 'Male',
+  role: 'user' as const,
+  isBloodBank: false,
+  currentMode: 'user' as const,
+  profileComplete: true,
+  verified: true,
+  profilePhoto: 'https://i.pravatar.cc/150?img=8',
+  lastDonation: '2024-08-01',
+  totalDonations: 12,
+  joinedDate: '2022-03-15',
+};
+
+// Donors List
 export const mockDonors = [
   {
     id: '1',
@@ -15,6 +38,7 @@ export const mockDonors = [
     profilePhoto: 'https://i.pravatar.cc/150?img=1',
     latitude: 40.7128,
     longitude: -74.0060,
+    totalDonations: 8,
   },
   {
     id: '2',
@@ -32,6 +56,7 @@ export const mockDonors = [
     profilePhoto: 'https://i.pravatar.cc/150?img=12',
     latitude: 40.7580,
     longitude: -73.9855,
+    totalDonations: 15,
   },
   {
     id: '3',
@@ -49,6 +74,7 @@ export const mockDonors = [
     profilePhoto: 'https://i.pravatar.cc/150?img=5',
     latitude: 40.7489,
     longitude: -73.9680,
+    totalDonations: 3,
   },
   {
     id: '4',
@@ -66,6 +92,7 @@ export const mockDonors = [
     profilePhoto: 'https://i.pravatar.cc/150?img=13',
     latitude: 40.7614,
     longitude: -73.9776,
+    totalDonations: 20,
   },
   {
     id: '5',
@@ -83,6 +110,25 @@ export const mockDonors = [
     profilePhoto: 'https://i.pravatar.cc/150?img=9',
     latitude: 40.7282,
     longitude: -73.7949,
+    totalDonations: 5,
+  },
+  {
+    id: '6',
+    name: 'Ahmed Hassan',
+    bloodGroup: 'B-' as const,
+    gender: 'Male',
+    age: 29,
+    city: 'New York',
+    distance: 5.4,
+    availability: 'available' as const,
+    lastDonation: '2024-09-12',
+    phone: '+1 234-567-8906',
+    email: 'ahmed.h@email.com',
+    verified: true,
+    profilePhoto: 'https://i.pravatar.cc/150?img=14',
+    latitude: 40.7306,
+    longitude: -73.9352,
+    totalDonations: 10,
   },
 ];
 
@@ -134,6 +180,41 @@ export const mockRequests = [
   },
 ];
 
+// Chat Conversations List
+export const mockChatConversations = [
+  {
+    id: 'chat-1',
+    participantId: '2',
+    participantName: 'Michael Chen',
+    participantPhoto: 'https://i.pravatar.cc/150?img=12',
+    lastMessage: 'Just your ID and donor card if you have one. Thank you!',
+    lastMessageTime: '2024-10-27T10:37:00',
+    unreadCount: 0,
+    bloodGroup: 'O+' as const,
+  },
+  {
+    id: 'chat-2',
+    participantId: '1',
+    participantName: 'Sarah Johnson',
+    participantPhoto: 'https://i.pravatar.cc/150?img=1',
+    lastMessage: "I'll be available next week for donation.",
+    lastMessageTime: '2024-10-26T15:22:00',
+    unreadCount: 2,
+    bloodGroup: 'A+' as const,
+  },
+  {
+    id: 'chat-3',
+    participantId: '5',
+    participantName: 'Jessica Martinez',
+    participantPhoto: 'https://i.pravatar.cc/150?img=9',
+    lastMessage: 'Thank you for your help!',
+    lastMessageTime: '2024-10-25T09:15:00',
+    unreadCount: 0,
+    bloodGroup: 'O-' as const,
+  },
+];
+
+// Individual Chat Messages
 export const mockMessages = [
   {
     id: '1',
@@ -145,7 +226,7 @@ export const mockMessages = [
   },
   {
     id: '2',
-    senderId: 'me',
+    senderId: 'current-user-id',
     senderName: 'You',
     text: 'Thank you so much! Can you come to Mount Sinai Hospital tomorrow?',
     timestamp: '2024-10-27T10:32:00',
@@ -161,13 +242,240 @@ export const mockMessages = [
   },
   {
     id: '4',
-    senderId: 'me',
+    senderId: 'current-user-id',
     senderName: 'You',
     text: 'Just your ID and donor card if you have one. Thank you!',
     timestamp: '2024-10-27T10:37:00',
     isMe: true,
   },
 ];
+
+// Notifications/Alerts
+export const mockNotifications = [
+  {
+    id: 'notif-1',
+    type: 'request' as const,
+    title: 'New Blood Request Nearby',
+    message: 'A+ blood needed urgently at Mount Sinai Hospital (2.3 km away)',
+    timestamp: '2024-10-27T08:30:00',
+    read: false,
+    priority: 'high' as const,
+    icon: 'alert-circle',
+  },
+  {
+    id: 'notif-2',
+    type: 'message' as const,
+    title: 'New Message from Michael Chen',
+    message: 'Hi! I saw your request for A+ blood. I can help.',
+    timestamp: '2024-10-27T10:30:00',
+    read: false,
+    priority: 'medium' as const,
+    icon: 'chatbubble',
+  },
+  {
+    id: 'notif-3',
+    type: 'donation' as const,
+    title: 'Donation Confirmed',
+    message: 'Your donation has been confirmed for tomorrow at 2 PM',
+    timestamp: '2024-10-26T14:20:00',
+    read: true,
+    priority: 'medium' as const,
+    icon: 'checkmark-circle',
+  },
+  {
+    id: 'notif-4',
+    type: 'reminder' as const,
+    title: 'Eligible to Donate Again',
+    message: "It's been 3 months since your last donation. You can donate again!",
+    timestamp: '2024-10-25T09:00:00',
+    read: true,
+    priority: 'low' as const,
+    icon: 'time',
+  },
+  {
+    id: 'notif-5',
+    type: 'achievement' as const,
+    title: '10 Lives Saved!',
+    message: "Congratulations! You've completed 10 donations and saved many lives.",
+    timestamp: '2024-10-24T11:45:00',
+    read: true,
+    priority: 'low' as const,
+    icon: 'trophy',
+  },
+];
+
+// Donation History
+export const mockDonationHistory = [
+  {
+    id: 'history-1',
+    type: 'donation' as const,
+    bloodGroup: 'A+' as const,
+    quantity: '1 unit',
+    location: 'Mount Sinai Hospital',
+    date: '2024-08-01',
+    status: 'completed' as const,
+    recipient: 'John Smith',
+  },
+  {
+    id: 'history-2',
+    type: 'donation' as const,
+    bloodGroup: 'A+' as const,
+    quantity: '1 unit',
+    location: 'NYU Langone Health',
+    date: '2024-05-15',
+    status: 'completed' as const,
+    recipient: 'Anonymous',
+  },
+  {
+    id: 'history-3',
+    type: 'request' as const,
+    bloodGroup: 'A+' as const,
+    quantity: '2 units',
+    location: 'Mount Sinai Hospital',
+    date: '2024-10-27',
+    status: 'pending' as const,
+    requester: 'You',
+  },
+  {
+    id: 'history-4',
+    type: 'donation' as const,
+    bloodGroup: 'A+' as const,
+    quantity: '1 unit',
+    location: 'NewYork-Presbyterian Hospital',
+    date: '2024-02-20',
+    status: 'completed' as const,
+    recipient: 'Maria Garcia',
+  },
+];
+
+// Blood Bank Profiles
+export const mockBloodBanks = [
+  {
+    id: 'bb-1',
+    name: 'Mount Sinai Blood Center',
+    address: '1 Gustave L. Levy Place, New York, NY 10029',
+    phone: '+1 212-241-6500',
+    email: 'bloodcenter@mountsinai.org',
+    latitude: 40.7903,
+    longitude: -73.9527,
+    distance: 2.1,
+    verified: true,
+    rating: 4.8,
+    totalCollections: 15420,
+  },
+  {
+    id: 'bb-2',
+    name: 'NYU Langone Blood Bank',
+    address: '550 1st Ave, New York, NY 10016',
+    phone: '+1 212-263-7300',
+    email: 'bloodbank@nyulangone.org',
+    latitude: 40.7424,
+    longitude: -73.9738,
+    distance: 3.5,
+    verified: true,
+    rating: 4.7,
+    totalCollections: 12350,
+  },
+];
+
+// Blood Stock Data (for Blood Bank Mode)
+export const mockBloodStock = [
+  {
+    bloodGroup: 'A+' as const,
+    units: 45,
+    lastUpdated: '2024-10-27T08:00:00',
+    status: 'adequate' as const,
+    expiringUnits: 5,
+    expiryDate: '2024-11-05',
+  },
+  {
+    bloodGroup: 'A-' as const,
+    units: 12,
+    lastUpdated: '2024-10-27T08:00:00',
+    status: 'low' as const,
+    expiringUnits: 2,
+    expiryDate: '2024-11-08',
+  },
+  {
+    bloodGroup: 'B+' as const,
+    units: 38,
+    lastUpdated: '2024-10-27T08:00:00',
+    status: 'adequate' as const,
+    expiringUnits: 4,
+    expiryDate: '2024-11-10',
+  },
+  {
+    bloodGroup: 'B-' as const,
+    units: 8,
+    lastUpdated: '2024-10-27T08:00:00',
+    status: 'critical' as const,
+    expiringUnits: 1,
+    expiryDate: '2024-11-02',
+  },
+  {
+    bloodGroup: 'AB+' as const,
+    units: 22,
+    lastUpdated: '2024-10-27T08:00:00',
+    status: 'adequate' as const,
+    expiringUnits: 3,
+    expiryDate: '2024-11-12',
+  },
+  {
+    bloodGroup: 'AB-' as const,
+    units: 6,
+    lastUpdated: '2024-10-27T08:00:00',
+    status: 'critical' as const,
+    expiringUnits: 1,
+    expiryDate: '2024-11-01',
+  },
+  {
+    bloodGroup: 'O+' as const,
+    units: 52,
+    lastUpdated: '2024-10-27T08:00:00',
+    status: 'adequate' as const,
+    expiringUnits: 6,
+    expiryDate: '2024-11-15',
+  },
+  {
+    bloodGroup: 'O-' as const,
+    units: 10,
+    lastUpdated: '2024-10-27T08:00:00',
+    status: 'low' as const,
+    expiringUnits: 2,
+    expiryDate: '2024-11-07',
+  },
+];
+
+// Blood Bank Reports/Statistics
+export const mockReportsData = {
+  weekly: {
+    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    donations: [12, 15, 18, 14, 20, 22, 16],
+    requests: [8, 10, 12, 11, 14, 16, 10],
+  },
+  monthly: {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    donations: [120, 135, 142, 138, 156, 168, 172, 165, 180, 195, 0, 0],
+    requests: [85, 92, 98, 95, 102, 110, 108, 112, 120, 128, 0, 0],
+  },
+  bloodGroupDistribution: [
+    { bloodGroup: 'O+', percentage: 35, count: 52 },
+    { bloodGroup: 'A+', percentage: 30, count: 45 },
+    { bloodGroup: 'B+', percentage: 26, count: 38 },
+    { bloodGroup: 'AB+', percentage: 15, count: 22 },
+    { bloodGroup: 'O-', percentage: 7, count: 10 },
+    { bloodGroup: 'A-', percentage: 8, count: 12 },
+    { bloodGroup: 'B-', percentage: 5, count: 8 },
+    { bloodGroup: 'AB-', percentage: 4, count: 6 },
+  ],
+  summary: {
+    totalDonations: 1852,
+    totalRequests: 1245,
+    activeDonors: 856,
+    totalUnits: 193,
+    criticalUnits: 14,
+  },
+};
 
 export const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 
