@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "BloodLinkPlus",
-    "slug": "BloodLinkPlus",
+    "name": "Ayk Khoon",
+    "slug": "aykkhoon",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#DC143C"
     },
     "ios": {
       "supportsTablet": true
@@ -18,7 +18,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#DC143C"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
@@ -30,6 +30,6 @@
       "expo-font",
       "expo-router"
     ],
-    "scheme": "bloodlinkplus"
+    "scheme": "aykkhoon"
   }
 }

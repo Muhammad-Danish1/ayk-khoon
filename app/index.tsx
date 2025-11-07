@@ -42,7 +42,7 @@ export default function SplashScreen() {
     ).start();
 
     const timer = setTimeout(() => {
-      router.replace('/onboarding');
+      router.replace('/(auth)/login');
     }, 3000);
 
     return () => clearTimeout(timer);
@@ -69,8 +69,8 @@ export default function SplashScreen() {
             <Ionicons name="water" size={80} color={Colors.white} />
           </View>
         </Animated.View>
-        <Text style={styles.title}>BloodLink+</Text>
-        <Text style={styles.subtitle}>Saving Lives Together</Text>
+        <Text style={styles.title}>Ayk Khoon</Text>
+        <Text style={styles.subtitle}>Save Lives, Donate Blood</Text>
       </Animated.View>
       
       <Animated.View style={[styles.bottomText, { opacity: fadeAnim }]}>

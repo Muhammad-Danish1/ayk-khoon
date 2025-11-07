@@ -15,10 +15,10 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "BloodLinkPlus"
+args = "AykKhoon"
 
 [[workflows.workflow]]
-name = "BloodLinkPlus"
+name = "AykKhoon"
 author = "agent"
 
 [[workflows.workflow.tasks]]
@@ -32,7 +32,3 @@ outputType = "webview"
 [[ports]]
 localPort = 5000
 externalPort = 80
-
-[[ports]]
-localPort = 33923
-externalPort = 3000

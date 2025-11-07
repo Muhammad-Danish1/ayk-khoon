@@ -6,12 +6,10 @@ export default function RootLayout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="index" />
-        <Stack.Screen name="onboarding" />
         <Stack.Screen name="(auth)" />
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="donor-profile" />
-        <Stack.Screen name="request-blood" />
-        <Stack.Screen name="chat" />
+        <Stack.Screen name="(onboarding)" />
+        <Stack.Screen name="(user)" />
+        <Stack.Screen name="(bloodbank)" />
       </Stack>
     </GestureHandlerRootView>
   );
