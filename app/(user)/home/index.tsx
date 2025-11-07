@@ -12,51 +12,17 @@ import {
   View,
 } from "react-native";
 import { BorderRadius, Colors, Shadows, Spacing, Typography } from '../../../src/theme';
+import { mockRequests, mockDonors } from '../../../src/data/mockData';
 
-// Dummy data
 const userStats = {
   donations: 5,
-  nextDonation: "2023-12-15",
+  nextDonation: "Dec 15, 2024",
   bloodType: "A+",
+  lastDonation: "Sep 20, 2024",
 };
 
-const urgentRequests = [
-  {
-    id: "1",
-    patientName: "John Doe",
-    bloodType: "A+",
-    hospital: "City General Hospital",
-    distance: "2.5 km",
-    timeAgo: "2 hours ago",
-    urgent: true,
-  },
-  {
-    id: "2",
-    patientName: "Sarah Johnson",
-    bloodType: "B-",
-    hospital: "Mercy Medical Center",
-    distance: "5.1 km",
-    timeAgo: "5 hours ago",
-    urgent: true,
-  },
-];
-
-const nearbyDonationCamps = [
-  {
-    id: "1",
-    name: "Annual Blood Donation Camp",
-    date: "2023-12-10",
-    location: "Community Center, Downtown",
-    distance: "1.2 km",
-  },
-  {
-    id: "2",
-    name: "Red Cross Blood Drive",
-    date: "2023-12-15",
-    location: "City Mall",
-    distance: "3.5 km",
-  },
-];
+const urgentRequests = mockRequests.filter(req => req.urgency === 'high').slice(0, 3);
+const nearbyDonors = mockDonors.slice(0, 4);
 
 const QuickAction = ({ icon, label, onPress, color }) => (
   <TouchableOpacity style={styles.quickAction} onPress={onPress}>
@@ -73,7 +39,6 @@ export default function HomeScreen() {
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-    // Simulate network request
     setTimeout(() => {
       setRefreshing(false);
     }, 1000);
@@ -82,51 +47,59 @@ export default function HomeScreen() {
   const renderUrgentRequest = ({ item }) => (
     <TouchableOpacity 
       style={styles.urgentRequestCard}
-      onPress={() => router.push(`/request-details/${item.id}`)}
+      onPress={() => router.push(`/(user)/home/request-detail?id=${item.id}`)}
+      activeOpacity={0.7}
     >
       <View style={styles.urgentBadge}>
-        <Ionicons name="alert-circle" size={16} color={Colors.white} />
-        <Text style={styles.urgentBadgeText}>Urgent</Text>
+        <Ionicons name="alert-circle" size={14} color={Colors.white} />
+        <Text style={styles.urgentBadgeText}>URGENT</Text>
       </View>
-      <View style={styles.bloodTypeBadge}>
-        <Text style={styles.bloodTypeText}>{item.bloodType}</Text>
+      <View style={[styles.bloodTypeBadgeInCard, { backgroundColor: Colors.bloodGroups[item.bloodGroup] + '20' }]}>
+        <Text style={[styles.bloodTypeTextInCard, { color: Colors.bloodGroups[item.bloodGroup] }]}>
+          {item.bloodGroup}
+        </Text>
       </View>
-      <Text style={styles.patientName}>{item.patientName}</Text>
+      <Text style={styles.patientName}>{item.seekerName}</Text>
+      <Text style={styles.requestQuantity}>{item.quantity} needed</Text>
       <View style={styles.hospitalInfo}>
         <Ionicons name="location-outline" size={14} color={Colors.text.secondary} />
-        <Text style={styles.hospitalText}>{item.hospital}</Text>
-        <Text style={styles.distanceText}>• {item.distance} away</Text>
+        <Text style={styles.hospitalText} numberOfLines={1}>{item.hospital}</Text>
       </View>
       <View style={styles.timeAgoContainer}>
-        <Ionicons name="time-outline" size={14} color={Colors.text.secondary} />
-        <Text style={styles.timeAgoText}>{item.timeAgo}</Text>
+        <Ionicons name="calendar-outline" size={14} color={Colors.primary} />
+        <Text style={styles.distanceText}>By {item.neededBy}</Text>
       </View>
       <TouchableOpacity style={styles.donateButton}>
-        <Text style={styles.donateButtonText}>Donate Now</Text>
+        <Text style={styles.donateButtonText}>Respond</Text>
       </TouchableOpacity>
     </TouchableOpacity>
   );
 
-  const renderDonationCamp = ({ item }) => (
-    <TouchableOpacity style={styles.campCard}>
-      <View style={styles.campDate}>
-        <Text style={styles.campDay}>15</Text>
-        <Text style={styles.campMonth}>DEC</Text>
-      </View>
-      <View style={styles.campInfo}>
-        <Text style={styles.campName} numberOfLines={1}>{item.name}</Text>
-        <View style={styles.campLocation}>
-          <Ionicons name="location-outline" size={14} color={Colors.text.secondary} />
-          <Text style={styles.campLocationText} numberOfLines={1}>{item.location}</Text>
+  const renderNearbyDonor = ({ item }) => (
+    <TouchableOpacity 
+      style={styles.donorCard}
+      onPress={() => router.push(`/(user)/home/find-donors?id=${item.id}`)}
+      activeOpacity={0.7}
+    >
+      <Image source={{ uri: item.profilePhoto }} style={styles.donorAvatar} />
+      <View style={styles.donorInfo}>
+        <Text style={styles.donorName}>{item.name}</Text>
+        <View style={styles.donorBloodType}>
+          <Ionicons name="water" size={12} color={Colors.primary} />
+          <Text style={styles.donorBloodTypeText}>{item.bloodGroup}</Text>
         </View>
-        <View style={styles.campDistance}>
-          <Ionicons name="walk-outline" size={14} color={Colors.primary} />
-          <Text style={styles.campDistanceText}>{item.distance} away</Text>
+        <View style={styles.donorLocation}>
+          <Ionicons name="location-outline" size={12} color={Colors.text.secondary} />
+          <Text style={styles.donorLocationText}>{item.distance.toFixed(1)} km away</Text>
         </View>
       </View>
-      <TouchableOpacity style={styles.registerButton}>
-        <Text style={styles.registerButtonText}>Register</Text>
-      </TouchableOpacity>
+      <View style={[styles.availabilityBadge, { 
+        backgroundColor: item.availability === 'available' ? Colors.success + '20' : Colors.text.tertiary + '20' 
+      }]}>
+        <View style={[styles.availabilityDot, { 
+          backgroundColor: item.availability === 'available' ? Colors.success : Colors.text.tertiary 
+        }]} />
+      </View>
     </TouchableOpacity>
   );
 
@@ -219,21 +192,21 @@ export default function HomeScreen() {
         />
       </View>
 
-      {/* Nearby Donation Camps */}
+      {/* Nearby Donors */}
       <View style={[styles.section, { marginBottom: Spacing.xl }]}>
         <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Nearby Donation Camps</Text>
-          <TouchableOpacity onPress={() => router.push('/donation-camps')}>
+          <Text style={styles.sectionTitle}>Nearby Donors</Text>
+          <TouchableOpacity onPress={() => router.push('/(user)/home/find-donors')}>
             <Text style={styles.seeAllText}>See All</Text>
           </TouchableOpacity>
         </View>
         <FlatList
-          data={nearbyDonationCamps}
-          renderItem={renderDonationCamp}
+          data={nearbyDonors}
+          renderItem={renderNearbyDonor}
           keyExtractor={(item) => item.id}
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.campsList}
+          contentContainerStyle={styles.donorsList}
         />
       </View>
     </ScrollView>
@@ -426,6 +399,86 @@ const styles = StyleSheet.create({
     color: Colors.white,
     fontWeight: Typography.fontWeight.semibold,
     fontSize: Typography.fontSize.sm,
+  },
+  bloodTypeBadgeInCard: {
+    position: 'absolute',
+    top: Spacing.lg,
+    right: Spacing.lg,
+    paddingHorizontal: Spacing.sm,
+    paddingVertical: Spacing.xxs,
+    borderRadius: BorderRadius.xs,
+  },
+  bloodTypeTextInCard: {
+    fontSize: Typography.fontSize.sm,
+    fontWeight: Typography.fontWeight.bold,
+  },
+  requestQuantity: {
+    fontSize: Typography.fontSize.sm,
+    color: Colors.text.secondary,
+    marginBottom: Spacing.sm,
+  },
+  donorsList: {
+    paddingLeft: Spacing.xl,
+    paddingRight: Spacing.md,
+  },
+  donorCard: {
+    width: 160,
+    backgroundColor: Colors.white,
+    borderRadius: BorderRadius.lg,
+    padding: Spacing.md,
+    marginRight: Spacing.md,
+    alignItems: 'center',
+    ...Shadows.sm,
+  },
+  donorAvatar: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    marginBottom: Spacing.sm,
+  },
+  donorInfo: {
+    alignItems: 'center',
+    width: '100%',
+  },
+  donorName: {
+    fontSize: Typography.fontSize.sm,
+    fontWeight: Typography.fontWeight.semibold,
+    color: Colors.text.primary,
+    marginBottom: Spacing.xxs,
+    textAlign: 'center',
+  },
+  donorBloodType: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: Spacing.xxs,
+  },
+  donorBloodTypeText: {
+    fontSize: Typography.fontSize.xs,
+    color: Colors.primary,
+    fontWeight: Typography.fontWeight.bold,
+    marginLeft: Spacing.xxs,
+  },
+  donorLocation: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: Spacing.sm,
+  },
+  donorLocationText: {
+    fontSize: Typography.fontSize.xs,
+    color: Colors.text.secondary,
+    marginLeft: Spacing.xxs,
+  },
+  availabilityBadge: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  availabilityDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
   },
   campsList: {
     paddingLeft: Spacing.xl,
