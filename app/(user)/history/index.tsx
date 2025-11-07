@@ -1,37 +1,9 @@
 import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { Card } from '../../../src/components/Card';
-import { Colors, Spacing, Typography } from '../../../src/theme';
-
-const history = [
-  {
-    id: '1',
-    type: 'donation',
-    title: 'Blood Donation',
-    date: 'Nov 15, 2023',
-    location: 'City Blood Bank',
-    bloodType: 'A+',
-    status: 'completed',
-  },
-  {
-    id: '2',
-    type: 'request',
-    title: 'Blood Request',
-    date: 'Oct 28, 2023',
-    location: 'General Hospital',
-    bloodType: 'O+',
-    status: 'completed',
-  },
-  {
-    id: '3',
-    type: 'donation',
-    title: 'Blood Donation',
-    date: 'Sep 5, 2023',
-    location: 'Red Cross Center',
-    bloodType: 'A+',
-    status: 'completed',
-  },
-  // Add more history items as needed
-];
+import { StatusBadge } from '../../../src/components/StatusBadge';
+import { Colors, Spacing, Typography, BorderRadius } from '../../../src/theme';
+import { mockDonationHistory } from '../../../src/data/mockData';
 
 const getStatusColor = (status: string) => {
   switch (status) {
@@ -49,56 +21,53 @@ const getStatusColor = (status: string) => {
 export default function HistoryScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>History</Text>
+      <Text style={styles.title}>Donation History</Text>
       
       <FlatList
-        data={history}
+        data={mockDonationHistory}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <Card style={styles.historyCard}>
-            <View style={styles.historyHeader}>
-              <Text style={styles.historyTitle}>{item.title}</Text>
+          <Card style={styles.historyCard} variant="elevated">
+            <View style={styles.iconTypeContainer}>
               <View style={[
-                styles.statusBadge,
-                { backgroundColor: getStatusColor(item.status) + '20' }
+                styles.typeIcon,
+                { backgroundColor: item.type === 'donation' ? Colors.success + '20' : Colors.secondary + '20' }
               ]}>
-                <Text style={[
-                  styles.statusText,
-                  { color: getStatusColor(item.status) }
-                ]}>
-                  {item.status.charAt(0).toUpperCase() + item.status.slice(1)}
-                </Text>
+                <Ionicons 
+                  name={item.type === 'donation' ? 'water' : 'medkit'} 
+                  size={24} 
+                  color={item.type === 'donation' ? Colors.success : Colors.secondary} 
+                />
+              </View>
+              <View style={styles.historyContent}>
+                <View style={styles.historyHeader}>
+                  <Text style={styles.historyTitle}>
+                    {item.type === 'donation' ? 'Blood Donation' : 'Blood Request'}
+                  </Text>
+                  <StatusBadge status={item.status as any} size="sm" />
+                </View>
+                
+                <View style={styles.historyDetails}>
+                  <View style={styles.detailRow}>
+                    <Ionicons name="calendar-outline" size={16} color={Colors.text.secondary} />
+                    <Text style={styles.detailValue}>{item.date}</Text>
+                  </View>
+                  <View style={styles.detailRow}>
+                    <Ionicons name="location-outline" size={16} color={Colors.text.secondary} />
+                    <Text style={styles.detailValue}>{item.location}</Text>
+                  </View>
+                  <View style={styles.detailRow}>
+                    <Ionicons name="water" size={16} color={Colors.primary} />
+                    <Text style={[styles.detailValue, styles.bloodType]}>{item.bloodGroup}</Text>
+                    <Text style={styles.quantityText}> • {item.quantity}</Text>
+                  </View>
+                </View>
               </View>
             </View>
-            
-            <View style={styles.historyDetails}>
-              <View style={styles.detailRow}>
-                <Text style={styles.detailLabel}>Date:</Text>
-                <Text style={styles.detailValue}>{item.date}</Text>
-              </View>
-              <View style={styles.detailRow}>
-                <Text style={styles.detailLabel}>Location:</Text>
-                <Text style={styles.detailValue}>{item.location}</Text>
-              </View>
-              <View style={styles.detailRow}>
-                <Text style={styles.detailLabel}>Blood Type:</Text>
-                <Text style={[styles.detailValue, styles.bloodType]}>{item.bloodType}</Text>
-              </View>
-            </View>
-            
-            {item.type === 'donation' && (
-              <View style={styles.donationBadge}>
-                <Text style={styles.donationText}>You donated blood</Text>
-              </View>
-            )}
-            {item.type === 'request' && (
-              <View style={styles.requestBadge}>
-                <Text style={styles.requestText}>You requested blood</Text>
-              </View>
-            )}
           </Card>
         )}
         contentContainerStyle={styles.listContent}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );
@@ -107,21 +76,37 @@ export default function HistoryScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.background.light,
-    padding: Spacing.lg,
+    backgroundColor: Colors.background.secondary,
+    paddingTop: Spacing.lg,
+    paddingHorizontal: Spacing.lg,
   },
   title: {
     fontSize: Typography.fontSize['2xl'],
     fontWeight: Typography.fontWeight.bold,
     color: Colors.text.primary,
-    marginBottom: Spacing.lg,
+    marginBottom: Spacing.md,
   },
   listContent: {
-    paddingBottom: Spacing.xxl,
+    paddingBottom: Spacing['4xl'],
   },
   historyCard: {
     marginBottom: Spacing.md,
     padding: Spacing.md,
+  },
+  iconTypeContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+  },
+  typeIcon: {
+    width: 48,
+    height: 48,
+    borderRadius: BorderRadius.md,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: Spacing.md,
+  },
+  historyContent: {
+    flex: 1,
   },
   historyHeader: {
     flexDirection: 'row',
@@ -130,66 +115,29 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.sm,
   },
   historyTitle: {
-    fontSize: Typography.fontSize.lg,
+    fontSize: Typography.fontSize.base,
     fontWeight: Typography.fontWeight.semibold,
     color: Colors.text.primary,
-  },
-  statusBadge: {
-    paddingHorizontal: Spacing.sm,
-    paddingVertical: 2,
-    borderRadius: 10,
-  },
-  statusText: {
-    fontSize: Typography.fontSize.xs,
-    fontWeight: Typography.fontWeight.semibold,
+    flex: 1,
   },
   historyDetails: {
-    marginTop: Spacing.sm,
+    gap: Spacing.xs,
   },
   detailRow: {
     flexDirection: 'row',
-    marginBottom: Spacing.xs,
-  },
-  detailLabel: {
-    fontSize: Typography.fontSize.sm,
-    color: Colors.text.secondary,
-    width: 80,
+    alignItems: 'center',
+    gap: Spacing.xs,
   },
   detailValue: {
     fontSize: Typography.fontSize.sm,
-    color: Colors.text.primary,
-    flex: 1,
+    color: Colors.text.secondary,
   },
   bloodType: {
     color: Colors.primary,
     fontWeight: Typography.fontWeight.bold,
   },
-  donationBadge: {
-    position: 'absolute',
-    top: 12,
-    right: 12,
-    backgroundColor: `${Colors.primary}10`,
-    paddingHorizontal: Spacing.sm,
-    paddingVertical: 2,
-    borderRadius: 10,
-  },
-  donationText: {
-    color: Colors.primary,
-    fontSize: Typography.fontSize.xs,
-    fontWeight: Typography.fontWeight.semibold,
-  },
-  requestBadge: {
-    position: 'absolute',
-    top: 12,
-    right: 12,
-    backgroundColor: `${Colors.secondary}10`,
-    paddingHorizontal: Spacing.sm,
-    paddingVertical: 2,
-    borderRadius: 10,
-  },
-  requestText: {
-    color: Colors.secondary,
-    fontSize: Typography.fontSize.xs,
-    fontWeight: Typography.fontWeight.semibold,
+  quantityText: {
+    fontSize: Typography.fontSize.sm,
+    color: Colors.text.tertiary,
   },
 });
